@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::group(['prefix' => 'upload'], function () {
+  Route::get('/', [FileUploadController::class, 'index']);
+  Route::post('/', [FileUploadController::class, 'create'])->name('create_upload');
 });
