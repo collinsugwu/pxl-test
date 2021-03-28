@@ -48,13 +48,6 @@ class FileUploadController extends Controller
     return array_chunk($converted_file, 500);
   }
 
-  private function toArray($data) {
-    if (is_array($data)) {
-      return $data;
-    }
-    return json_decode($data, true);
-  }
-
   private function checkFileExists($fileHash)
   {
     $file_obj = $this->fetchHash($fileHash);

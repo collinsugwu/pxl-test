@@ -21,8 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8784fc35-f00b-45cf-be91-9b0d9b08de12" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FileUploadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FileUploadController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/file-upload/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/file-upload/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
