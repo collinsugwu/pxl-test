@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\CreditCard;
+use App\Models\HashFile;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Bus\Batchable;
@@ -21,17 +22,20 @@ class SaveUserDetails implements ShouldQueue
 
   public $header;
   public $chunk;
+  public $hashId;
 
   /**
    * Create a new job instance.
    *
    * @param $chunk
    * @param $header
+   * @param $hashId
    */
-  public function __construct($chunk, $header)
+  public function __construct($chunk, $header, $hashId)
   {
     $this->chunk = $chunk;
     $this->header = $header;
+    $this->hashId = $hashId;
   }
 
   /**
@@ -42,11 +46,13 @@ class SaveUserDetails implements ShouldQueue
   public function handle()
   {
     foreach ($this->chunk as $data) {
+      $index = 0;
+      $index++;
       $date = $this->sanitizeDate($data['date_of_birth']);
       $carbonDate = Carbon::parse($date);
       $age = $carbonDate->age;
       if (is_null($date) || ($age >= 18 && $age <= 65)) {
-        $this->createUser($data, $this->header, $date);
+        $this->createUser($data, $this->header, $date, $index, $this->hashId);
       }
     }
   }
@@ -76,10 +82,12 @@ class SaveUserDetails implements ShouldQueue
    * @param $data
    * @param $header
    * @param $date
+   * @param $index
+   * @param $hasedId
    */
-  private function createUser($data, $header, $date)
+  private function createUser($data, $header, $date, $index, $hashedId)
   {
-    DB::transaction(function () use ($data, $date) {
+    DB::transaction(function () use ($data, $date, $index, $hashedId) {
       $user = new User();
       $user->name = $data['name'];
       $user->address = $data['address'];
@@ -98,10 +106,11 @@ class SaveUserDetails implements ShouldQueue
       $creditCard->number = $data['credit_card']['number'];
       $creditCard->expiration_date = $data['credit_card']['expirationDate'];
       $creditCard->save();
+
+      HashFile::where('file_hash_id', $hashedId)->update([
+        'index' => $index,
+      ]);
     });
   }
 
-  private function saveData() {
-
-  }
 }

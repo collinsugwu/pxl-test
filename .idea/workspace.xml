@@ -24,7 +24,6 @@
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FileUploadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FileUploadController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Jobs/SaveUserDetails.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SaveUserDetails.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Traits/SerializeFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/SerializeFile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +180,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1616912246915</updated>
-      <workItem from="1616912248123" duration="16102000" />
+      <workItem from="1616912248123" duration="26830000" />
     </task>
     <servers />
   </component>
@@ -212,5 +211,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1616913581450" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1616933204729">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1616933204729" />
   </component>
 </project>
