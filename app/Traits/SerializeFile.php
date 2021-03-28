@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 trait SerializeFile
 {
+  public function hashFile() {
+
+  }
+
+  public function fetchHash() {
+
+  }
+
+  public function matchHash($firstHash, $secondHash) {
+
+  }
   /**
    * @param Request $request
    * @return array

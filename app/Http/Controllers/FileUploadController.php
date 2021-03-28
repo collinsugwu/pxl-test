@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SaveUserDetails;
 use App\Traits\SerializeFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Bus;
 
 class FileUploadController extends Controller
 {
@@ -25,7 +27,11 @@ class FileUploadController extends Controller
     ]);
     list($converted_file, $header) = $this->convertFileToArray($request);
     $chunks = $this->chunkArrayFile($converted_file);
-    return $chunks;
+    $batch = Bus::batch([])->dispatch();
+    foreach ($chunks as $chunk) {
+      $batch->add(new SaveUserDetails($chunk, $header));
+    }
+    return "Data saved successfully";
   }
 
   /**
