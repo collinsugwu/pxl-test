@@ -96,6 +96,10 @@ php artisan migrate
 ```
 php artisan queue:work
 ```
+6. Test
+```
+phpunit
+```
 <!-- USAGE EXAMPLES -->
 ## Usage
  imports	the	contents	of	a	JSON-file	cleanly	and	consistently	to	a	

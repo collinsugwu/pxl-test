@@ -29,7 +29,7 @@ class FileUploadController extends Controller
     $fileHash = $this->hashFile($request->file);
     $fileExists = $this->checkFileExists($fileHash);
     if ($fileExists) {
-        $this->processRemainingData($request, $fileHash);
+        return "File has been uploaded before";
     } else {
       $this->saveHash($fileHash);
       list($converted_file, $header) = $this->convertFileToArray($request);
@@ -78,11 +78,4 @@ class FileUploadController extends Controller
    * @param Request $request
    * @param $fileHash
    */
-  private function processRemainingData(Request $request, $fileHash){
-    $hashedFile = $this->fetchHash($fileHash);
-    $index = $hashedFile->index;
-    list($convertedFile, $header) = $this->convertFileToArray($request);
-    $remainingData = array_slice($convertedFile, $index, count($convertedFile));
-    $this->processJob($remainingData, $header, $fileHash);
-  }
 }
