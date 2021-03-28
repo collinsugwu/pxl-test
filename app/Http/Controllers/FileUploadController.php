@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SaveUserDetails;
-use App\Models\HashFile;
 use App\Traits\SerializeFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
@@ -82,8 +81,8 @@ class FileUploadController extends Controller
   private function processRemainingData(Request $request, $fileHash){
     $hashedFile = $this->fetchHash($fileHash);
     $index = $hashedFile->index;
-    list($converted_file, $header) = $this->convertFileToArray($request);
-    $remainingData = array_slice($converted_file, $index, count($converted_file));
+    list($convertedFile, $header) = $this->convertFileToArray($request);
+    $remainingData = array_slice($convertedFile, $index, count($convertedFile));
     $this->processJob($remainingData, $header, $fileHash);
   }
 }

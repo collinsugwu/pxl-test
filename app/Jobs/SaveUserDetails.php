@@ -24,6 +24,10 @@ class SaveUserDetails implements ShouldQueue
   public $chunk;
   public $hashId;
 
+  private $index = 0;
+
+  public $tries = 2;
+
   /**
    * Create a new job instance.
    *
@@ -46,13 +50,12 @@ class SaveUserDetails implements ShouldQueue
   public function handle()
   {
     foreach ($this->chunk as $data) {
-      $index = 0;
-      $index++;
+      $this->index++;
       $date = $this->sanitizeDate($data['date_of_birth']);
       $carbonDate = Carbon::parse($date);
       $age = $carbonDate->age;
       if (is_null($date) || ($age >= 18 && $age <= 65)) {
-        $this->createUser($data, $this->header, $date, $index, $this->hashId);
+        $this->createUser($data, $date, $this->hashId);
       }
     }
   }
@@ -80,14 +83,12 @@ class SaveUserDetails implements ShouldQueue
 
   /**
    * @param $data
-   * @param $header
    * @param $date
-   * @param $index
-   * @param $hasedId
+   * @param $hashedId
    */
-  private function createUser($data, $header, $date, $index, $hashedId)
+  private function createUser($data, $date, $hashedId)
   {
-    DB::transaction(function () use ($data, $date, $index, $hashedId) {
+    DB::transaction(function () use ($data, $date, $hashedId) {
       $user = new User();
       $user->name = $data['name'];
       $user->address = $data['address'];
@@ -108,7 +109,7 @@ class SaveUserDetails implements ShouldQueue
       $creditCard->save();
 
       HashFile::where('file_hash_id', $hashedId)->update([
-        'index' => $index,
+        'index' => $this->index,
       ]);
     });
   }
