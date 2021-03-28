@@ -83,20 +83,21 @@ git clone https://github.com/collinsugwu/pxl-test
 ```sh
  composer install
 ``` 
-
 3. Run Migrations
 ```
 php artisan migrate
 ```
-4. Start Server
+4 Copy env.example into .env file
+
+5. Start Server
 ```
 php artisan migrate
 ```
-5. Run Queue worker
+6. Run Queue worker
 ```
 php artisan queue:work
 ```
-6. Test
+7. Test
 ```
 phpunit
 ```
