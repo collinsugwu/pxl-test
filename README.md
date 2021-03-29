@@ -142,3 +142,21 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Project Link: [https://github.com/collinsugwu/pxl-test](https://github.com/collinsugwu/pxl-test)
 
 <!-- ACKNOWLEDGEMENTS -->
+
+
+# Answers to Bonus Questions
+
+
+### What	happens  when the	source file grows to,  say, 500 times the given size?
+
+<p>When there's 500 times the given data, this means there will be a high consumption of memory allocation, so the most efficent way to handle 
+  such amount of data set would be to use streams. Streams provide on-demand access to data. This means you don’t need to load the entire contents of your dataset into memory before processing can start. Without streams, opening a 20MB file will consume 20MB of memory.
+</p>
+
+###  Is	your	solution	easily	adjustable	to	different	source	data	formats	(CSV,	XML, etc.)?
+
+<p>Yes, it can easily be adjusted to suit other data formats, the validations validates other data format, while the serializeFile Traits alse checks for the file type, so a little adjustment will accomodate other data formats.</p>
+
+###  Say	that	another	data	filter	would	be	the	requirement	that	the	credit	card	number must	have	three identical	digits	in	sequence.	How	would	you	tackle	this?
+
+<p>I will write a method that filters out the credit cards that don't have consecutive three identical	digits in sequence before saving the details associated with the cards that have.</p>
