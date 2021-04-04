@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\CreditCard;
 use App\Models\HashFile;
+use App\Models\Traits\SanitizeDate;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Bus\Batchable;
@@ -14,19 +15,18 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Exception;
 
 class SaveUserDetails implements ShouldQueue
 {
-  use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+  use SanitizeDate, Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-  public $header;
-  public $chunk;
-  public $hashId;
+  private $header;
+  private $chunk;
+  private $hashId;
 
   private $index = 0;
 
-  public $tries = 2;
+  private $tries = 2;
 
   /**
    * Create a new job instance.
@@ -57,27 +57,6 @@ class SaveUserDetails implements ShouldQueue
       if (is_null($date) || ($age >= 18 && $age <= 65)) {
         $this->createUser($data, $date, $this->hashId);
       }
-    }
-  }
-
-  /**
-   * @param $date
-   * @return string|null
-   */
-  private function sanitizeDate($date)
-  {
-    if (is_null($date)) return null;
-
-    try {
-      $pattern = "/\d+/i";
-      preg_match_all($pattern, $date, $matches);
-      $getFirstThreeValues = array_slice($matches[0], 0, 3);
-      if (strlen($getFirstThreeValues[2]) > 2) {
-        $getFirstThreeValues = array_reverse($getFirstThreeValues);
-      }
-      return implode('-', $getFirstThreeValues);
-    } catch (Exception $e) {
-      return null;
     }
   }
 
