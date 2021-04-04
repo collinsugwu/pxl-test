@@ -20,16 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8784fc35-f00b-45cf-be91-9b0d9b08de12" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Models/Traits/SanitizeDate.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FileUploadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FileUploadController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/file-upload/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/file-upload/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/SaveUserDetails.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SaveUserDetails.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/HashFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/HashFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Traits/SerializeFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/SerializeFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/test/test.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test/test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/FileUploadTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/FileUploadTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -166,11 +171,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
-  <component name="RunManager" selected="PHPUnit.FileUploadTest.testFileValidation">
-    <configuration name="ExampleTest.testBasicTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Feature\ExampleTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/ExampleTest.php" method="testBasicTest" scope="Method" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="PHPUnit.FileUploadTest.testCreateSuccessfully">
     <configuration name="FileUploadTest.testCreateSuccessfully" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Feature\FileUploadTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/FileUploadTest.php" method="testCreateSuccessfully" scope="Method" />
       <method v="2" />
@@ -179,8 +180,16 @@
       <TestRunner class="Tests\Feature\FileUploadTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/FileUploadTest.php" method="testFileValidation" scope="Method" />
       <method v="2" />
     </configuration>
-    <configuration name="FileUploadTest.testIndex" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Feature\FileUploadTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/FileUploadTest.php" method="testIndex" scope="Method" />
+    <configuration name="FileUploadTest.test_file_validation" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\FileUploadTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/FileUploadTest.php" method="test_file_validation" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="FileUploadTest.test_file_validation_with_no_data" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\FileUploadTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/FileUploadTest.php" method="test_file_validation_with_no_data" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="FileUploadTest.test_file_validation_with_wrong_no_data" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\FileUploadTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/FileUploadTest.php" method="test_file_validation_with_wrong_no_data" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -189,10 +198,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="PHPUnit.FileUploadTest.testFileValidation" />
-        <item itemvalue="PHPUnit.FileUploadTest.testIndex" />
         <item itemvalue="PHPUnit.FileUploadTest.testCreateSuccessfully" />
-        <item itemvalue="PHPUnit.ExampleTest.testBasicTest" />
+        <item itemvalue="PHPUnit.FileUploadTest.test_file_validation_with_wrong_no_data" />
+        <item itemvalue="PHPUnit.FileUploadTest.test_file_validation_with_no_data" />
+        <item itemvalue="PHPUnit.FileUploadTest.test_file_validation" />
+        <item itemvalue="PHPUnit.FileUploadTest.testFileValidation" />
       </list>
     </recent_temporary>
   </component>
@@ -205,6 +215,9 @@
       <option name="presentableId" value="Default" />
       <updated>1616912246915</updated>
       <workItem from="1616912248123" duration="26830000" />
+      <workItem from="1617107348071" duration="1819000" />
+      <workItem from="1617147239918" duration="377000" />
+      <workItem from="1617521040580" duration="6684000" />
     </task>
     <servers />
   </component>
@@ -221,32 +234,49 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1616925818597">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1617521472380">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1616925818597" />
-    <state width="1323" height="176" key="GridCell.Tab.0.bottom" timestamp="1616972160194">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1617521472380" />
+    <state width="1323" height="223" key="GridCell.Tab.0.bottom" timestamp="1617527994762">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616972160194" />
-    <state width="1323" height="176" key="GridCell.Tab.0.center" timestamp="1616972160194">
+    <state width="1323" height="223" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1617527994762" />
+    <state width="1323" height="223" key="GridCell.Tab.0.center" timestamp="1617527994762">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616972160194" />
-    <state width="1323" height="176" key="GridCell.Tab.0.left" timestamp="1616972160194">
+    <state width="1323" height="223" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1617527994762" />
+    <state width="1323" height="223" key="GridCell.Tab.0.left" timestamp="1617527994762">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616972160194" />
-    <state width="1323" height="176" key="GridCell.Tab.0.right" timestamp="1616972160194">
+    <state width="1323" height="223" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1617527994762" />
+    <state width="1323" height="223" key="GridCell.Tab.0.right" timestamp="1617527994762">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616972160194" />
-    <state x="417" y="87" key="NewPhpClassDialog" timestamp="1616957409261">
+    <state width="1323" height="223" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1617527994762" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1617527994762">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="417" y="87" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1616957409261" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1617527994762" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1617527994762">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1617527994762" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1617527994762">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1617527994762" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1617527994762">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1617527994762" />
+    <state x="417" y="87" key="NewPhpClassDialog" timestamp="1617521385628">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="417" y="87" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1617521385628" />
     <state x="517" y="287" key="NewPhpFileDialog" timestamp="1616913581450">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

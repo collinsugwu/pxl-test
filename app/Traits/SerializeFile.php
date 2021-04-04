@@ -19,15 +19,6 @@ trait SerializeFile
   }
 
   /**
-   * @param $hash_id
-   * @return mixed
-   */
-  public function fetchHash($hash_id)
-  {
-    return HasHFile::where('file_hash_id', $hash_id)->first();
-  }
-
-  /**
    * @param $firstHash
    * @param $secondHash
    * @return bool
@@ -39,15 +30,6 @@ trait SerializeFile
     return false;
   }
 
-  /**
-   * @param $hashed_file
-   */
-  public function saveHash($hashed_file)
-  {
-    HashFile::create([
-      'file_hash_id' => $hashed_file
-    ]);
-  }
 
   /**
    * @param Request $request

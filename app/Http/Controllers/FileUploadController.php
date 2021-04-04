@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SaveUserDetails;
+use App\Models\HashFile;
 use App\Traits\SerializeFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
@@ -31,9 +32,9 @@ class FileUploadController extends Controller
     if ($fileExists) {
         return "File has been uploaded before";
     } else {
-      $this->saveHash($fileHash);
       list($converted_file, $header) = $this->convertFileToArray($request);
       $this->processJob($converted_file, $header, $fileHash, $fileHash);
+      HashFile::saveHash($fileHash);
     }
 
     return "Data saved successfully";
@@ -48,9 +49,13 @@ class FileUploadController extends Controller
     return array_chunk($converted_file, 500);
   }
 
+  /**
+   * @param $fileHash
+   * @return bool
+   */
   private function checkFileExists($fileHash)
   {
-    $file_obj = $this->fetchHash($fileHash);
+    $file_obj = HashFile::fetchHash($fileHash);
     if (is_object($file_obj)) {
       return true;
     }
@@ -58,6 +63,12 @@ class FileUploadController extends Controller
     return false;
   }
 
+  /**
+   * @param $converted_file
+   * @param $header
+   * @param $hashId
+   * @throws \Throwable
+   */
   private function processJob($converted_file, $header, $hashId)
   {
     $chunks = $this->chunkFileArray($converted_file);
@@ -67,8 +78,4 @@ class FileUploadController extends Controller
     }
   }
 
-  /**
-   * @param Request $request
-   * @param $fileHash
-   */
 }
